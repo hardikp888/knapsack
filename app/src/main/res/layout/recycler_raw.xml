@@ -1,30 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_margin="4dp"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:gravity="center"
+        android:padding="8dp"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txt_exp_type"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/txt_exp_amount"
+            <TextView
+                android:id="@+id/txt_exp_type_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expense_type"
+                android:layout_margin="2dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_exp_type"
+                android:layout_margin="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:orientation="horizontal"
+            android:layout_margin="2dp"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/txt_exp_date"
+            <TextView
+                android:id="@+id/txt_exp_amount_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_margin="2dp"
+                android:text="@string/expense_amount" />
+
+            <TextView
+                android:id="@+id/txt_exp_amount"
+                android:layout_width="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:orientation="horizontal"
+            android:layout_margin="2dp"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/txt_exp_date_title"
+                android:layout_width="wrap_content"
+                android:text="@string/expense_date"
+                android:textStyle="bold"
+                android:layout_margin="2dp"
+                android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/txt_exp_date"
+                android:layout_width="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

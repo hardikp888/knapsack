@@ -3,7 +3,6 @@ package com.example.hardik.knapsack.UI;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +24,7 @@ public class ViewExpenseFragment extends Fragment {
 
     private RecyclerView mRecyclersViewExpense;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view, container, false);
@@ -43,16 +43,18 @@ public class ViewExpenseFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        DataBaseAdapter dataBaseAdapter = new DataBaseAdapter(getActivity());
+        ArrayList<Expense> list = dataBaseAdapter.getAllExpense();
+        ((ExpenseAdapter)mRecyclersViewExpense.getAdapter()).updateList(list);
+    }
 
     private final View.OnClickListener mAddClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            InsertExpenseFragment insertExpenseFragment = new InsertExpenseFragment();
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(android.R.id.tabcontent, insertExpenseFragment);
-            fragmentTransaction.commit();
-
+            ((MainActivity) getActivity()).changeTab(1);
         }
     };
 }

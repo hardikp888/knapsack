@@ -5,4 +5,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="expense_type">Expense Type</string>
+    <string name="expense_des">Expense Description</string>
+    <string name="expense_amount">Expense Amount</string>
+    <string name="expense_date">Expense Date</string>
+
+    <string name="save">Save</string>
+
+
 </resources>

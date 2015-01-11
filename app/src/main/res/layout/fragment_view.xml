@@ -13,5 +13,8 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_margin="16dp"
+        android:background="@drawable/shape_floating_btn"
+        android:src="@android:drawable/ic_input_add"
+        android:contentDescription="@null"
         android:layout_gravity="bottom|right" />
 </FrameLayout>

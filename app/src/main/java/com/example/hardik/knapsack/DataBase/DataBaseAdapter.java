@@ -42,7 +42,7 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         try {
-            db.execSQL("CREATE TABLE " + TABLE_EXPENSE + " (" + EXPENSE_ID + " INTEGER AUTOINCREMENT PRIMARY KEY,"
+            db.execSQL("CREATE TABLE " + TABLE_EXPENSE + " (" + EXPENSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + EXPENSE_TYPE + " TEXT," + EXPENSE_AMOUNT + " INTEGER," + EXPENSE_DESC + " TEXT," + Expense_DATE + " DATE)");
             Log.i(TAG, TABLE_EXPENSE + "Table created");
         } catch (Exception e) {

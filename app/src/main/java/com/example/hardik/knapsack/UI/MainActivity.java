@@ -43,17 +43,17 @@ public class MainActivity extends ActionBarActivity {
 
     private void addTab() {
 
-        TabHost.TabSpec tabSpec1 = mTabHost.newTabSpec("Insert");
-        tabSpec1.setIndicator("Insert");
-        tabSpec1.setContent(new TabFactory(MainActivity.this));
-        mTabHost.addTab(tabSpec1);
-        mFragmentList.add(Fragment.instantiate(this, InsertExpenseFragment.class.getName()));
-
         TabHost.TabSpec tabSpec2 = mTabHost.newTabSpec("View");
         tabSpec2.setIndicator("View");
         tabSpec2.setContent(new TabFactory(MainActivity.this));
         mTabHost.addTab(tabSpec2);
         mFragmentList.add(Fragment.instantiate(this, ViewExpenseFragment.class.getName()));
+
+        TabHost.TabSpec tabSpec1 = mTabHost.newTabSpec("Insert");
+        tabSpec1.setIndicator("Insert");
+        tabSpec1.setContent(new TabFactory(MainActivity.this));
+        mTabHost.addTab(tabSpec1);
+        mFragmentList.add(Fragment.instantiate(this, InsertExpenseFragment.class.getName()));
 
         TabHost.TabSpec tabSpec3 = mTabHost.newTabSpec("Bill");
         tabSpec3.setIndicator("Bill");
@@ -116,4 +116,8 @@ public class MainActivity extends ActionBarActivity {
             mViewPager.setCurrentItem(position);
         }
     };
+
+    public void changeTab(int pos) {
+        mViewPager.setCurrentItem(pos);
+    }
 }

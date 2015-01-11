@@ -29,12 +29,18 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         return new ExpenseHolder(view);
     }
 
+    public void updateList(ArrayList<Expense> expenseList) {
+        mExpenseList.clear();
+        mExpenseList.addAll(expenseList);
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(ExpenseHolder holder, int position) {
         Expense expense = mExpenseList.get(position);
 
         holder.mTxtType.setText(expense.getType());
-        holder.mTxtAmount.setText(expense.getDate());
+        holder.mTxtAmount.setText(String.valueOf(expense.getAmount()));
         holder.mTxtDate.setText(expense.getDate());
     }
 
