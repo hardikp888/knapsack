@@ -12,5 +12,11 @@
 
     <string name="save">Save</string>
 
+    <string name="select_date">Select Date</string>
+
+    <string name="ok">OK</string>
+    <string name="back">BACK</string>
+
+
 
 </resources>

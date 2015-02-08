@@ -43,7 +43,7 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
 
         try {
             db.execSQL("CREATE TABLE " + TABLE_EXPENSE + " (" + EXPENSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + EXPENSE_TYPE + " TEXT," + EXPENSE_AMOUNT + " INTEGER," + EXPENSE_DESC + " TEXT," + Expense_DATE + " DATE)");
+                    + EXPENSE_TYPE + " TEXT," + EXPENSE_AMOUNT + " INTEGER," + EXPENSE_DESC + " TEXT," + Expense_DATE + " TEXT)");
             Log.i(TAG, TABLE_EXPENSE + "Table created");
         } catch (Exception e) {
             Log.e(TAG, "Error in create " + TABLE_EXPENSE + " table : " + e.getMessage());
@@ -53,7 +53,7 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.i(TAG, "Database is updated from " + oldVersion + " to " + newVersion);
-        db.execSQL(TABLE_EXPENSE + " DROP ON EXIST");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXPENSE);
         onCreate(db);
     }
 
@@ -96,6 +96,38 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
             }
         } catch (Exception e) {
             Log.e(TAG, "Error in get all expense : " + e.getMessage());
+        }
+        return expenseList;
+    }
+
+    public ArrayList<Expense> getMonthExpense(int month, int year) {
+        final ArrayList<Expense> expenseList = new ArrayList<>();
+        mDataBase = getWritableDatabase();
+        try {
+            Cursor cursor = mDataBase.rawQuery("SELECT * FROM " + TABLE_EXPENSE, null);
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+
+                    String[] date = (cursor.getString(cursor.getColumnIndex(Expense_DATE))).split("-");
+
+                    int expMonth = Integer.parseInt(date[1]);
+                    int expYear = Integer.parseInt(date[2]);
+
+                    if (month == expMonth && year == expYear) {
+                        final Expense expense = new Expense();
+                        expense.setType(cursor.getString(cursor.getColumnIndex(EXPENSE_TYPE)));
+                        expense.setAmount(cursor.getInt(cursor.getColumnIndex(EXPENSE_AMOUNT)));
+                        expense.setType(cursor.getString(cursor.getColumnIndex(EXPENSE_TYPE)));
+                        expense.setDescription(cursor.getString(cursor.getColumnIndex(EXPENSE_DESC)));
+                        expense.setDate(cursor.getString(cursor.getColumnIndex(Expense_DATE)));
+                        expenseList.add(expense);
+                    }
+                }
+            } else {
+                Log.e(TAG, "Null cursor in get all expense");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error in get all expense per month : " + e.getMessage());
         }
         return expenseList;
     }
