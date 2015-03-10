@@ -21,7 +21,7 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
 
     private static final String TAG = "DataBaseAdapter";
     private static final String DATABASE_NAME = "sack_database";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     //Table EXPENSE
     private static final String TABLE_EXPENSE = "expense";
