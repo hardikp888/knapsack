@@ -10,12 +10,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.hardik.knapsack.BL.Expense;
+import com.example.hardik.knapsack.BL.Global;
 import com.example.hardik.knapsack.DataBase.DataBaseAdapter;
 import com.example.hardik.knapsack.R;
 
@@ -27,6 +30,60 @@ import java.util.TimeZone;
  */
 public class InsertExpenseFragment extends Fragment {
 
+    private final View.OnClickListener mInsertClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Expense expense = new Expense();
+            expense.setType(mEdTxtType.getText().toString().trim());
+            expense.setDate(mEdTxtDate.getText().toString().trim());
+            expense.setDescription(mEdTxtDes.getText().toString().trim());
+            expense.setAmount(Integer.parseInt(mEdTxtAmount.getText().toString().trim()));
+
+            DataBaseAdapter dataBaseAdapter = new DataBaseAdapter(getActivity());
+            dataBaseAdapter.insetExpense(expense);
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            getActivity().finish();
+            startActivity(intent);
+        }
+    };
+    private final View.OnFocusChangeListener mDateFocusChange = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                showDateDialog();
+            }
+        }
+    };
+    private final View.OnFocusChangeListener mExpTypeFocusListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                showListDialog();
+            }
+        }
+    };
+    private final View.OnClickListener mExpTypeOnclick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showListDialog();
+        }
+    };
+    private final AdapterView.OnItemClickListener mExpListItemClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String expenseType = (String) parent.getItemAtPosition(position);
+            if (expenseType != null && expenseType.length() > 0) {
+                mEdTxtType.setText(expenseType);
+            }
+        }
+    };
+    DatePickerDialog.OnDateSetListener mDateChangedListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        }
+    };
     private EditText mEdTxtType;
     private EditText mEdTxtAmount;
     private EditText mEdTxtDes;
@@ -51,38 +108,11 @@ public class InsertExpenseFragment extends Fragment {
             }
         });
 
+        mEdTxtType.setOnFocusChangeListener(mExpTypeFocusListener);
+        mEdTxtType.setOnClickListener(mExpTypeOnclick);
+
         return view;
     }
-
-
-    private final View.OnClickListener mInsertClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Expense expense = new Expense();
-            expense.setType(mEdTxtType.getText().toString().trim());
-            expense.setDate(mEdTxtDate.getText().toString().trim());
-            expense.setDescription(mEdTxtDes.getText().toString().trim());
-            expense.setAmount(Integer.parseInt(mEdTxtAmount.getText().toString().trim()));
-
-            DataBaseAdapter dataBaseAdapter = new DataBaseAdapter(getActivity());
-            dataBaseAdapter.insetExpense(expense);
-
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            getActivity().finish();
-            startActivity(intent);
-        }
-    };
-
-    private final View.OnFocusChangeListener mDateFocusChange = new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            if (hasFocus) {
-                showDateDialog();
-            }
-        }
-    };
-
 
     private void showDateDialog() {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
@@ -114,13 +144,6 @@ public class InsertExpenseFragment extends Fragment {
         dialog.show();
     }
 
-    DatePickerDialog.OnDateSetListener mDateChangedListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        }
-    };
-
-
     private void showListDialog() {
 
         Dialog dialog = new Dialog(getActivity());
@@ -129,7 +152,10 @@ public class InsertExpenseFragment extends Fragment {
         dialog.setContentView(view);
 
         ListView listView = (ListView) view.findViewById(R.id.list_dialog);
-        Button btnBack = (Button) view.findViewById(R.id.btn_dialog_back);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_1, Global.getExpenseType());
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(mExpListItemClick);
 
         dialog.show();
     }
