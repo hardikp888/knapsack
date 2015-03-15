@@ -70,12 +70,18 @@ public class InsertExpenseFragment extends Fragment {
             showListDialog();
         }
     };
+    Dialog mDialogList;
     private final AdapterView.OnItemClickListener mExpListItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String expenseType = (String) parent.getItemAtPosition(position);
             if (expenseType != null && expenseType.length() > 0) {
                 mEdTxtType.setText(expenseType);
+            }
+
+            if (mDialogList != null) {
+                mDialogList.dismiss();
+                mDialogList.cancel();
             }
         }
     };
@@ -146,10 +152,10 @@ public class InsertExpenseFragment extends Fragment {
 
     private void showListDialog() {
 
-        Dialog dialog = new Dialog(getActivity());
-        dialog.setTitle(getString(R.string.expense_type));
+        mDialogList = new Dialog(getActivity());
+        mDialogList.setTitle(getString(R.string.expense_type));
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_list, null, false);
-        dialog.setContentView(view);
+        mDialogList.setContentView(view);
 
         ListView listView = (ListView) view.findViewById(R.id.list_dialog);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
@@ -157,6 +163,6 @@ public class InsertExpenseFragment extends Fragment {
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(mExpListItemClick);
 
-        dialog.show();
+        mDialogList.show();
     }
 }

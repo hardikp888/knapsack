@@ -1,6 +1,7 @@
 package com.example.hardik.knapsack.UI;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,7 @@ public class BillAdapter extends BaseExpandableListAdapter {
 
         TextView txtGroupText = (TextView) convertView.findViewById(R.id.expand_raw_bill_month);
         txtGroupText.setText(groupTitle);
+        txtGroupText.setTypeface(null, Typeface.BOLD);
 
         return convertView;
     }

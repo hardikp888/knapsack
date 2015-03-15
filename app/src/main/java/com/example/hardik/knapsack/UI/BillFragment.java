@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
+import com.example.hardik.knapsack.BL.Global;
+import com.example.hardik.knapsack.DataBase.DataBaseAdapter;
 import com.example.hardik.knapsack.R;
 
 import java.util.ArrayList;
@@ -37,40 +39,82 @@ public class BillFragment extends Fragment {
     private void prepareListData() {
         mListMonth = new ArrayList<String>();
         mBillItem = new HashMap<String, ArrayList<String>>();
+        DataBaseAdapter dbAdapter = new DataBaseAdapter(getActivity());
 
         // Adding child data
-        mListMonth.add("Top 250");
-        mListMonth.add("Now Showing");
-        mListMonth.add("Coming Soon..");
+        mListMonth.add("January");
+        mListMonth.add("February");
+        mListMonth.add("march");
+        mListMonth.add("April");
+        mListMonth.add("May");
+        mListMonth.add("June");
+        mListMonth.add("July");
+        mListMonth.add("August");
+        mListMonth.add("September");
+        mListMonth.add("October");
+        mListMonth.add("November");
+        mListMonth.add("December");
 
-        // Adding child data
-        ArrayList<String> top250 = new ArrayList<String>();
-        top250.add("The Shawshank Redemption");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
-        top250.add("The Dark Knight");
-        top250.add("12 Angry Men");
+        ArrayList<String> expenseList = Global.getExpenseType();
 
-        ArrayList<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
-        nowShowing.add("The Wolverine");
+        for (int i = 1; i <= 12; i++) {
+            ArrayList<String> list = new ArrayList<>();
+            list.add("Food : " + dbAdapter.getExpenseByType(i, expenseList.get(0)));
+            list.add("Travel :" + dbAdapter.getExpenseByType(i, expenseList.get(1)));
+            list.add("Petrol : " + dbAdapter.getExpenseByType(i, expenseList.get(2)));
+            list.add("Medicine : " + dbAdapter.getExpenseByType(i, expenseList.get(3)));
+            list.add("Entertainment" + dbAdapter.getExpenseByType(i, expenseList.get(4)));
 
-        ArrayList<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
-        comingSoon.add("The Spectacular Now");
-        comingSoon.add("The Canyons");
-        comingSoon.add("Europa Report");
+            mBillItem.put(mListMonth.get(i - 1), list);
+        }
 
-        mBillItem.put(mListMonth.get(0), top250); // Header, Child data
-        mBillItem.put(mListMonth.get(1), nowShowing);
-        mBillItem.put(mListMonth.get(2), comingSoon);
+
+       /* ArrayList<String> february = new ArrayList<>();
+        february.add("Food : " + dbAdapter.getExpenseByType(2, expenseList.get(0)));
+        february.add("Travel :" + dbAdapter.getExpenseByType(2, expenseList.get(1)));
+        february.add("Petrol : " + dbAdapter.getExpenseByType(2, expenseList.get(2)));
+        february.add("Medicine : " + dbAdapter.getExpenseByType(2, expenseList.get(3)));
+        february.add("Entertainment" + dbAdapter.getExpenseByType(2, expenseList.get(4)));
+
+        ArrayList<String> march = new ArrayList<>();
+        march.add("Food : " + dbAdapter.getExpenseByType(3, expenseList.get(0)));
+        march.add("Travel :" + dbAdapter.getExpenseByType(3, expenseList.get(1)));
+        march.add("Petrol : " + dbAdapter.getExpenseByType(3, expenseList.get(2)));
+        march.add("Medicine : " + dbAdapter.getExpenseByType(3, expenseList.get(3)));
+        march.add("Entertainment" + dbAdapter.getExpenseByType(3, expenseList.get(4)));
+
+        ArrayList<String> april = new ArrayList<>();
+        april.add("Food : " + dbAdapter.getExpenseByType(4, expenseList.get(0)));
+        april.add("Travel :" + dbAdapter.getExpenseByType(4, expenseList.get(1)));
+        april.add("Petrol : " + dbAdapter.getExpenseByType(4, expenseList.get(2)));
+        april.add("Medicine : " + dbAdapter.getExpenseByType(4, expenseList.get(3)));
+        april.add("Entertainment" + dbAdapter.getExpenseByType(4, expenseList.get(4)));
+
+        ArrayList<String> may = new ArrayList<>();
+        may.add("Food : " + dbAdapter.getExpenseByType(5, expenseList.get(0)));
+        may.add("Travel :" + dbAdapter.getExpenseByType(5, expenseList.get(1)));
+        may.add("Petrol : " + dbAdapter.getExpenseByType(5, expenseList.get(2)));
+        may.add("Medicine : " + dbAdapter.getExpenseByType(5, expenseList.get(3)));
+        may.add("Entertainment" + dbAdapter.getExpenseByType(5, expenseList.get(4)));
+
+        ArrayList<String> june = new ArrayList<>();
+        june.add("Food : " + dbAdapter.getExpenseByType(6, expenseList.get(0)));
+        june.add("Travel :" + dbAdapter.getExpenseByType(6, expenseList.get(1)));
+        june.add("Petrol : " + dbAdapter.getExpenseByType(6, expenseList.get(2)));
+        june.add("Medicine : " + dbAdapter.getExpenseByType(6, expenseList.get(3)));
+        june.add("Entertainment" + dbAdapter.getExpenseByType(6, expenseList.get(4)));
+
+        ArrayList<String> july = new ArrayList<>();
+        july.add("Food : " + dbAdapter.getExpenseByType(7, expenseList.get(0)));
+        july.add("Travel :" + dbAdapter.getExpenseByType(7, expenseList.get(1)));
+        july.add("Petrol : " + dbAdapter.getExpenseByType(7, expenseList.get(2)));
+        july.add("Medicine : " + dbAdapter.getExpenseByType(7, expenseList.get(3)));
+        july.add("Entertainment" + dbAdapter.getExpenseByType(7, expenseList.get(4)));
+
+        mBillItem.put(mListMonth.get(0), january); // Header, Child data
+        mBillItem.put(mListMonth.get(1), february);
+        mBillItem.put(mListMonth.get(2), march);
+        mBillItem.put(mListMonth.get(3), may);*/
 
 
     }
