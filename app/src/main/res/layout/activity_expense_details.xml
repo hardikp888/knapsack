@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:background="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+
+
+    <TextView
+        android:id="@+id/txt_exp_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/expense_type"
+        android:layout_below="@id/toolBar" />
+
+    <TextView
+        android:id="@+id/txt_exp_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/expense_amount"
+        android:layout_below="@id/txt_exp_type" />
+
+    <TextView
+        android:id="@+id/txt_exp_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/expense_date"
+        android:layout_below="@id/txt_exp_amount" />
+
+    <TextView
+        android:id="@+id/txt_exp_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/expense_des"
+        android:layout_below="@id/txt_exp_date" />
+
+    <ImageView
+        android:id="@+id/img_exp_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/txt_exp_description" />
+
+
+</RelativeLayout>

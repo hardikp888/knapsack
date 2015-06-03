@@ -1,8 +1,10 @@
+/**
+ * Expense class is used as getter setter object to store expense data
+ * in object
+ */
+
 package com.example.hardik.knapsack.BL;
 
-/**
- * Created by Stranger on 1/7/2015.
- */
 public class Expense {
 
     private int id;
@@ -10,6 +12,7 @@ public class Expense {
     private String description;
     private int amount;
     private String date;
+    private String photo;
 
 
     public String getDate() {
@@ -50,5 +53,13 @@ public class Expense {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPhoto() {
+        return this.photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

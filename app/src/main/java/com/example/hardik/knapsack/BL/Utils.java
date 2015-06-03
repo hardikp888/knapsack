@@ -1,14 +1,19 @@
+/**
+ * Utility class
+ */
 package com.example.hardik.knapsack.BL;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.telephony.TelephonyManager;
 
-/**
- * Created by Stranger on 1/7/2015.
- */
 public class Utils {
 
+    /**
+     * Store sim card information in shared preference.
+     *
+     * @param context activity context
+     */
     public static void storeSIMData(Context context) {
 
         final SharedPreferences pref = context.getSharedPreferences(Global.PREFERENCE, Context.MODE_PRIVATE);

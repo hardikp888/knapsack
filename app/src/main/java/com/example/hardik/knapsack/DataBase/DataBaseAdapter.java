@@ -27,6 +27,7 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
     private static final String EXPENSE_DESC = "e_description";
     private static final String EXPENSE_AMOUNT = "e_amount";
     private static final String Expense_DATE = "e_date";
+    private static final String EXPENSE_PHOTO = "e_photo";
     private Context mContext;
     private SQLiteDatabase mDataBase;
 
@@ -41,8 +42,13 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         try {
-            db.execSQL("CREATE TABLE " + TABLE_EXPENSE + " (" + EXPENSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + EXPENSE_TYPE + " TEXT," + EXPENSE_AMOUNT + " INTEGER," + EXPENSE_DESC + " TEXT," + Expense_DATE + " TEXT)");
+            db.execSQL("CREATE TABLE " + TABLE_EXPENSE +
+                    " (" + EXPENSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + EXPENSE_TYPE + " TEXT,"
+                    + EXPENSE_AMOUNT + " INTEGER,"
+                    + EXPENSE_DESC + " TEXT,"
+                    + Expense_DATE + " TEXT,"
+                    + EXPENSE_PHOTO + " TEXT)");
             Log.i(TAG, TABLE_EXPENSE + "Table created");
         } catch (Exception e) {
             Log.e(TAG, "Error in create " + TABLE_EXPENSE + " table : " + e.getMessage());
@@ -66,6 +72,7 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
             values.put(EXPENSE_AMOUNT, expense.getAmount());
             values.put(EXPENSE_DESC, expense.getDescription());
             values.put(Expense_DATE, expense.getDate());
+            values.put(EXPENSE_PHOTO, expense.getPhoto());
 
             Log.i(TAG, "Expense Inserted Successfully : " + mDataBase.insert(TABLE_EXPENSE, null, values));
         } catch (Exception e) {
@@ -83,11 +90,13 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
             if (cursor != null) {
                 while (cursor.moveToNext()) {
                     final Expense expense = new Expense();
+                    expense.setId(cursor.getInt(cursor.getColumnIndex(EXPENSE_ID)));
                     expense.setType(cursor.getString(cursor.getColumnIndex(EXPENSE_TYPE)));
                     expense.setAmount(cursor.getInt(cursor.getColumnIndex(EXPENSE_AMOUNT)));
                     expense.setType(cursor.getString(cursor.getColumnIndex(EXPENSE_TYPE)));
                     expense.setDescription(cursor.getString(cursor.getColumnIndex(EXPENSE_DESC)));
                     expense.setDate(cursor.getString(cursor.getColumnIndex(Expense_DATE)));
+                    expense.setPhoto(cursor.getString(cursor.getColumnIndex(EXPENSE_PHOTO)));
                     expenseList.add(expense);
                 }
             } else {
@@ -114,11 +123,13 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
 
                     if (month == expMonth && year == expYear) {
                         final Expense expense = new Expense();
+                        expense.setId(cursor.getInt(cursor.getColumnIndex(EXPENSE_ID)));
                         expense.setType(cursor.getString(cursor.getColumnIndex(EXPENSE_TYPE)));
                         expense.setAmount(cursor.getInt(cursor.getColumnIndex(EXPENSE_AMOUNT)));
                         expense.setType(cursor.getString(cursor.getColumnIndex(EXPENSE_TYPE)));
                         expense.setDescription(cursor.getString(cursor.getColumnIndex(EXPENSE_DESC)));
                         expense.setDate(cursor.getString(cursor.getColumnIndex(Expense_DATE)));
+                        expense.setPhoto(cursor.getString(cursor.getColumnIndex(EXPENSE_PHOTO)));
                         expenseList.add(expense);
                     }
                 }
