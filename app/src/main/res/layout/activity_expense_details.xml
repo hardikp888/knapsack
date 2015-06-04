@@ -2,53 +2,127 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
+    <include
         android:id="@+id/toolBar"
-        android:background="@android:color/black"
+        layout="@layout/layout_toolbar" />
+
+
+    <LinearLayout
+        android:id="@+id/linear_exp_type"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/img_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.v7.widget.Toolbar>
-
-
-    <TextView
-        android:id="@+id/txt_exp_type"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/expense_type"
-        android:layout_below="@id/toolBar" />
+        android:layout_below="@id/toolBar"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txt_exp_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/expense_amount"
-        android:layout_below="@id/txt_exp_type" />
+        <TextView
+            android:id="@+id/txt_exp_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/expense_type" />
 
-    <TextView
-        android:id="@+id/txt_exp_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/expense_date"
-        android:layout_below="@id/txt_exp_amount" />
+        <TextView
+            android:id="@+id/txt_exp_type_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="@string/expense_type" />
 
-    <TextView
-        android:id="@+id/txt_exp_description"
-        android:layout_width="wrap_content"
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear_exp_amount"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/expense_des"
-        android:layout_below="@id/txt_exp_date" />
+        android:layout_below="@id/linear_exp_type"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/txt_exp_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/expense_amount" />
+
+        <TextView
+            android:id="@+id/txt_exp_amount_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="@string/expense_amount" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_exp_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_exp_amount"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_exp_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/expense_date" />
+
+        <TextView
+            android:id="@+id/txt_exp_date_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="@string/expense_date" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_exp_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_exp_date"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_exp_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/description" />
+
+        <TextView
+            android:id="@+id/txt_exp_description_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="@string/expense_des" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/img_exp_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_below="@id/txt_exp_description" />
+        android:layout_below="@id/linear_exp_description"
+        android:visibility="gone" />
 
 
 </RelativeLayout>
