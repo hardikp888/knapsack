@@ -2,17 +2,48 @@ package com.example.hardik.knapsack.UI;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.hardik.knapsack.BL.Expense;
+import com.example.hardik.knapsack.BL.Global;
+import com.example.hardik.knapsack.DataBase.DataBaseAdapter;
 import com.example.hardik.knapsack.R;
 
 public class ExpenseDetails extends ActionBarActivity {
+
+    Expense mExpense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_details);
+
+        final int expenseId = getIntent().getIntExtra(Global.EXPENSE_ID, 0);
+        mExpense = (new DataBaseAdapter(ExpenseDetails.this)).getExpenseByID(expenseId);
+
+        final TextView txtType = (TextView) findViewById(R.id.txt_exp_type_value);
+        final TextView txtAmount = (TextView) findViewById(R.id.txt_exp_amount_value);
+        final TextView txtDescription = (TextView) findViewById(R.id.txt_exp_description_value);
+        final TextView txtDate = (TextView) findViewById(R.id.txt_exp_date_value);
+        final ImageView imageView = (ImageView) findViewById(R.id.img_exp_photo);
+        final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+
+
+        txtType.setText(mExpense.getType());
+        txtAmount.setText(String.valueOf(mExpense.getAmount()));
+        txtDescription.setText(mExpense.getDescription());
+        txtDate.setText(mExpense.getDate());
+
+        /*if (mExpense.getPhoto() != null && (!mExpense.getPhoto().isEmpty())) {
+            imageView.setImageURI(Uri.fromFile(new File(mExpense.getPhoto())));
+        }*/
+
+        setSupportActionBar(toolbar);
+
     }
 
     @Override

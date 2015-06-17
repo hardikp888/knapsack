@@ -3,15 +3,16 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/toolBar"
-        layout="@layout/layout_toolbar" />
-
+        android:id="@+id/include_toolbar"
+        layout="@layout/toolbar_layout" />
 
     <LinearLayout
         android:id="@+id/linear_exp_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolBar"
+        android:layout_below="@id/include_toolbar"
+        android:layout_margin="16dp"
+
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -40,10 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linear_exp_type"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_margin="16dp"
         android:orientation="horizontal">
 
 
@@ -68,10 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linear_exp_amount"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_margin="16dp"
         android:orientation="horizontal">
 
         <TextView
@@ -95,10 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linear_exp_date"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_margin="16dp"
         android:orientation="horizontal">
 
         <TextView

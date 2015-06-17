@@ -170,4 +170,30 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
         return result;
     }
 
+    public Expense getExpenseByID(int id) {
+
+        mDataBase = getWritableDatabase();
+
+        Expense expense = new Expense();
+        String query = "SELECT * FROM " + TABLE_EXPENSE + " WHERE " + EXPENSE_ID + " = " + id;
+
+        Cursor cursor = mDataBase.rawQuery(query, null);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                expense.setId(cursor.getInt(cursor.getColumnIndex(EXPENSE_ID)));
+                expense.setType(cursor.getString(cursor.getColumnIndex(EXPENSE_TYPE)));
+                expense.setAmount(cursor.getInt(cursor.getColumnIndex(EXPENSE_AMOUNT)));
+                expense.setDate(cursor.getString(cursor.getColumnIndex(Expense_DATE)));
+                expense.setDescription(cursor.getString(cursor.getColumnIndex(EXPENSE_DESC)));
+                expense.setPhoto(cursor.getString(cursor.getColumnIndex(EXPENSE_PHOTO)));
+            }
+        } else {
+            Log.d(TAG, "Null cursor of empty cursor in getExpenseByID");
+        }
+
+
+        return expense;
+    }
+
 }

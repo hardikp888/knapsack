@@ -1,3 +1,4 @@
+/*
 package com.example.cemerademo;
 
 import java.io.File;
@@ -117,3 +118,4 @@ public class MainActivity extends Activity {
 		}
 	}
 }
+*/

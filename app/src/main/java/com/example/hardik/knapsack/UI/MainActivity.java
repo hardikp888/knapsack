@@ -19,8 +19,37 @@ import java.util.Vector;
 public class MainActivity extends ActionBarActivity {
 
     private TabHost mTabHost;
+    ViewPager.OnPageChangeListener mPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+
+            TabWidget tabWidget = mTabHost.getTabWidget();
+            int oldFocus = tabWidget.getDescendantFocusability();
+            tabWidget.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+            mTabHost.setCurrentTab(position);
+            tabWidget.setDescendantFocusability(oldFocus);
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
     private ViewPager mViewPager;
     private List<Fragment> mFragmentList = new Vector<Fragment>();
+    private TabHost.OnTabChangeListener mTabChangeListener = new TabHost.OnTabChangeListener() {
+        @Override
+        public void onTabChanged(String tabId) {
+            int position = mTabHost.getCurrentTab();
+            mViewPager.setCurrentItem(position);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +68,7 @@ public class MainActivity extends ActionBarActivity {
 
         mTabHost.setOnTabChangedListener(mTabChangeListener);
         mViewPager.setOnPageChangeListener(mPageChangeListener);
+
     }
 
     private void addTab() {
@@ -62,7 +92,6 @@ public class MainActivity extends ActionBarActivity {
         mFragmentList.add(Fragment.instantiate(this, BillFragment.class.getName()));
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -84,38 +113,6 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    ViewPager.OnPageChangeListener mPageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-
-            TabWidget tabWidget = mTabHost.getTabWidget();
-            int oldFocus = tabWidget.getDescendantFocusability();
-            tabWidget.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-            mTabHost.setCurrentTab(position);
-            tabWidget.setDescendantFocusability(oldFocus);
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
-
-    private TabHost.OnTabChangeListener mTabChangeListener = new TabHost.OnTabChangeListener() {
-        @Override
-        public void onTabChanged(String tabId) {
-            int position = mTabHost.getCurrentTab();
-            mViewPager.setCurrentItem(position);
-        }
-    };
 
     public void changeTab(int pos) {
         mViewPager.setCurrentItem(pos);

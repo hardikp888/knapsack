@@ -12,6 +12,7 @@
     <string name="expense_photo">Select Bill</string>
     <string name="take_photo">Take Photo</string>
     <string name="attach_bill">Attach Bill</string>
+    <string name="description">Description</string>
 
     <string name="save">Save</string>
 
